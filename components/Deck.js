@@ -35,7 +35,7 @@ class Deck extends React.Component {
     const cardCount =  typeof questions !== 'undefined' ? questions.length : 0 
     const cardEnding = cardCount > 1 || cardCount === 0 ? 's' : ''
     return (
-      <View style={styles.mainView}>
+      <View style={styles.mainView}  backgroundColor={bluegrey} >
           <Card title={title}>
             <View>
               <Text style={styles.cardSummary}>
@@ -60,7 +60,7 @@ class Deck extends React.Component {
               buttonStyle={[styles.buttonStyle, { marginTop: 10 }]}
               title='Start Quiz'
               onPress={() => {this.props.navigation.navigate('Quiz',
-                {navTitle: title,questions: questions })}
+                {navTitle: title,questions: questions, deckId: id})}
               }
             />
           </View>

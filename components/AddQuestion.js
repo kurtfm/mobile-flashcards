@@ -19,7 +19,7 @@ import { doesQuestionExistInQuestions } from '../utils/helpers'
 import { getDeck } from '../actions'
 import colors from '../utils/colors'
 
-const { white, grey} = colors
+const { white, grey, bluegrey } = colors
 
 class AddQuestion extends React.Component {
   state={
@@ -92,7 +92,7 @@ class AddQuestion extends React.Component {
 
   render() {
     return (
-      <View style={styles.mainView}>
+      <View style={styles.mainView}  backgroundColor={bluegrey} >
         <View style={styles.form}>
           <Text style={styles.subtitle}>Create a question and use either a correct or incorrect answer to make it interesting.</Text>
           <FormLabel>Question:</FormLabel>

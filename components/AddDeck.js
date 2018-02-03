@@ -19,7 +19,7 @@ import { doesTitleExistInDecks } from '../utils/helpers'
 import { getDecks } from '../actions'
 import colors from '../utils/colors'
 
-const { white } = colors
+const { white, bluegrey } = colors
 
 class AddDeck extends React.Component {
   state={
@@ -63,7 +63,7 @@ class AddDeck extends React.Component {
 
   render() {
     return (
-      <View style={styles.mainView}>
+      <View style={styles.mainView}  backgroundColor={bluegrey} >
         <View style={styles.form}>
           <FormLabel>Title</FormLabel>
           <FormInput
