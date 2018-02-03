@@ -50,7 +50,7 @@ export function addDeckByTitle(title){
     .then(()=>(uuid))
     .catch(function(error) {
         console.log(error);
-        })
+    })
 }
 
 /*
@@ -58,18 +58,18 @@ export function addDeckByTitle(title){
 */
 export function addCardToDeck(id,card){
     return AsyncStorage.getItem(CARDS_STORAGE_KEY)
-        .then(result => {
-            let updateData = JSON.parse(result);
-            updateData[id].questions.push(card)
-            return updateData
-            }
-        )
-        .then(
-            (updateData)=>(AsyncStorage.mergeItem(CARDS_STORAGE_KEY, JSON.stringify(updateData)))
-        )
-        .catch(function(error) {
-            console.log(error);
-        })
+    .then(result => {
+        let updateData = JSON.parse(result);
+        updateData[id].questions.push(card)
+        return updateData
+        }
+    )
+    .then(
+        (updateData)=>(AsyncStorage.mergeItem(CARDS_STORAGE_KEY, JSON.stringify(updateData)))
+    )
+    .catch(function(error) {
+        console.log(error);
+    })
 }
 
 /*

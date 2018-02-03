@@ -4,7 +4,7 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-import {Card, Button, Header} from 'react-native-elements'
+import { Card, Button } from 'react-native-elements'
 import { connect } from 'react-redux';
 import { getDeck, deleteDeck } from '../actions'
 import colors from '../utils/colors'
@@ -49,7 +49,7 @@ class Deck extends React.Component {
               buttonStyle={styles.buttonStyle}
               title='Add Card'
               onPress={() => {this.props.navigation.navigate('AddQuestion',
-                {navTitle: title,title: title, deckId: id})}
+                {navTitle: title, deckId: id})}
               }
             />
           </View>
