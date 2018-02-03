@@ -5,6 +5,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   NavigationActions,
+  StyleSheet,
 } from 'react-native';
 import {
   Button,
@@ -30,6 +31,9 @@ class AddDeck extends React.Component {
     if( doesTitleExistInDecks(this.props.decks,this.state.title) ) {
       this.setState({titleError: `This title was used before!`})
     }
+    else if(this.state.title === ''){
+      this.setState({titleError:`A title is required.`})
+    }
     else if( this.state.titleError === null ){
       addDeckByTitle(this.state.title)
       .then(id=>{
@@ -43,7 +47,7 @@ class AddDeck extends React.Component {
   titleValidation = (title)=>{
     //TODO: implement real validation library
     this.setState({title}, ()=>{
-        if( this.state.title.match(/^[0-9a-zA-Z \-\.\_]+$/) || this.state.title === '' ){
+        if( this.state.title.match(/^[0-9a-zA-Z \-\.\_]+$/) || this.state.titleError === null ){
           if(this.state.title.startsWith(' ')){
             this.setState({titleError:`Titles can't start with spaces.`})
           }
@@ -59,17 +63,18 @@ class AddDeck extends React.Component {
 
   render() {
     return (
-      <View style={styles.containerStyle}>
-        <View>
+      <View style={styles.mainView}>
+        <View style={styles.form}>
           <FormLabel>Title</FormLabel>
           <FormInput
             onChangeText={(title)=>{this.titleValidation(title)}}
             shake={this.state.titleError}
             value={this.state.title}
-            backgroundColor={white}
           />
           { this.state.titleError !== null && (
-          <FormValidationMessage>{this.state.titleError}</FormValidationMessage>
+          <FormValidationMessage>
+            {this.state.titleError}
+          </FormValidationMessage>
           )}
         </View>
         <View>
@@ -80,11 +85,14 @@ class AddDeck extends React.Component {
   }
 }
 
-const styles = {
-  containerStyle: {
+const styles = StyleSheet.create({
+  mainView: {
     flex: 1,
+  },
+  form:{
+    padding:20,
   }
-}
+})
 
 function mapStateToProps({decks}){
   return {decks}

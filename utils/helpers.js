@@ -7,3 +7,7 @@ export function doesTitleExistInDecks(decks, title) {
         })
     return exists
 }
+export function doesQuestionExistInQuestions(questions, question) {
+    var results = questions.filter((entry) =>{ return entry.question === question; })
+    return results.length > 0
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Text,
   View,
+  StyleSheet,
 } from 'react-native';
 import {Card, Button, Header} from 'react-native-elements'
 import { connect } from 'react-redux';
@@ -31,12 +32,14 @@ class Deck extends React.Component {
 
   render() {
     const { title, questions, id } = this.props.deck
+    const cardCount =  typeof questions !== 'undefined' ? questions.length : 0 
+    const cardEnding = cardCount > 1 || cardCount === 0 ? 's' : ''
     return (
       <View style={styles.mainView}>
           <Card title={title}>
             <View>
               <Text style={styles.cardSummary}>
-                {`${ typeof questions !== 'undefined' ? questions.length : 0 } cards`}
+                {`${cardCount} card${cardEnding}`}
               </Text>
             </View>
             <View>
@@ -46,7 +49,7 @@ class Deck extends React.Component {
               buttonStyle={styles.buttonStyle}
               title='Add Card'
               onPress={() => {this.props.navigation.navigate('AddQuestion',
-                {navTitle: title,title: title})}
+                {navTitle: title,title: title, deckId: id})}
               }
             />
           </View>
@@ -75,7 +78,11 @@ class Deck extends React.Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
+  mainView:{
+      flex: 1,
+      backgroundColor: bluegrey,
+  },
   cardSummary: {
     textAlign: 'center',
     marginBottom: 10,
@@ -91,7 +98,7 @@ const styles = {
     justifyContent: 'center',
     alignContent: 'center'
   },
-}
+})
 
 function mapStateToProps({deck}){
   return {deck}

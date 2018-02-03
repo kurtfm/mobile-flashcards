@@ -3,7 +3,12 @@ import uuidv4 from 'uuid/v4'
 
 const CARDS_STORAGE_KEY = '@flashCardsMobileApp'
 
-
+export function resetData(){
+    return AsyncStorage.removeItem(CARDS_STORAGE_KEY)
+    .catch(function(error) {
+        console.log(error);
+      })
+}
 /*
 *return an object of all of the decks along with their titles, questions, and answers. 
 */
@@ -24,7 +29,6 @@ export function getDeckById(id){
             if(decks[id]){
                 let deck = decks[id]
                 deck.id = id
-                console.log(deck)
                 return deck
             }
             else{
@@ -52,16 +56,19 @@ export function addDeckByTitle(title){
 /*
 * take in two arguments, title and card, and will add the card to the list of questions for the 
 */
-export function addCardToDeck(title,card){
-    return AsyncStorage.getItem(CARDS_STORAGE_KEY).then(result => {
-        const updateData = JSON.parse(result);
-        let questions = udpateData[title].questions;
-        questions.push(card);
-        AsyncStorage.mergeItem(title, JSON.stringify({
-        [title]: questions
-        }))
-    }).catch(function(error) {
-        console.log(error);
+export function addCardToDeck(id,card){
+    return AsyncStorage.getItem(CARDS_STORAGE_KEY)
+        .then(result => {
+            let updateData = JSON.parse(result);
+            updateData[id].questions.push(card)
+            return updateData
+            }
+        )
+        .then(
+            (updateData)=>(AsyncStorage.mergeItem(CARDS_STORAGE_KEY, JSON.stringify(updateData)))
+        )
+        .catch(function(error) {
+            console.log(error);
         })
 }
 
@@ -69,12 +76,17 @@ export function addCardToDeck(title,card){
 * take in a single title argument and add it to the decks.
 */
 export function deleteDeckById(id){
-    return AsyncStorage.getItem(CARDS_STORAGE_KEY).then(result => {
+    return AsyncStorage.getItem(CARDS_STORAGE_KEY)
+    .then(result => {
         let updateData = JSON.parse(result)
-        console.log(id)
         delete updateData[id]
-        AsyncStorage.setItem(CARDS_STORAGE_KEY, JSON.stringify(updateData))
-    }).catch(function(error) {
+        return updateData
+        }
+    )
+    .then(
+        (updateData)=>( AsyncStorage.setItem(CARDS_STORAGE_KEY, JSON.stringify(updateData)))
+    )
+    .catch(function(error) {
         console.log(error);
-        })
+    })
 }

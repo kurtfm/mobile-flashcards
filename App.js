@@ -12,7 +12,7 @@ import AddDeck from './components/AddDeck'
 import Deck from './components/Deck'
 import AddQuestion from './components/AddQuestion'
 import Quiz from './components/Quiz'
-import { setupData } from './utils/api'
+import { resetData } from './utils/api'
 
 
 const { white, indigo } = colors
@@ -88,7 +88,8 @@ const store = createStore(reducer, {}, applyMiddleware(thunk))
 
 export default class App extends React.Component {
   componentDidMount() {
-    //setupData()
+    //for testing purposes if you need to...
+    //resetData()
   }
   render() {
     return (
