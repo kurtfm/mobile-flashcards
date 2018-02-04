@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import colors from '../utils/colors'
+import QuizResults from './QuizResults'
 
 const { green, red, lighttext, bluegrey, lightblue, lightgreen } = colors
 
@@ -107,29 +108,7 @@ class Quiz extends React.Component {
       return (
         <ScrollView style={styles.mainView} backgroundColor={bluegrey} >
         { finished === true && (
-          <View>
-            <View style={styles.flip}>
-              <Card title="Quiz Results:" style={styles.card}>
-                <Text style={styles.cardText}>Your score: {score}%</Text>
-              </Card>
-            </View>
-            <View style={styles.buttonRow}>
-              <View style={styles.button}>
-                <Button
-                  title="Restart Quiz"
-                  backgroundColor={lightgreen}
-                  onPress={() => {this.props.navigation.navigate('Quiz',{questions})}}
-                />
-              </View>
-              <View style={styles.button}>
-                <Button
-                  title="Back to Deck"
-                  backgroundColor={lightblue}
-                  onPress={() => {this.props.navigation.navigate('Deck',{deckId:id})}}
-                />
-              </View>
-            </View>
-          </View>
+          <QuizResults id={id} questions={questions} score={score} {...this.props}/>
         )}
         { finished === false && (
           <View>

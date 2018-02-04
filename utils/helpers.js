@@ -50,25 +50,23 @@ export function setLocalNotification () {
 AsyncStorage.getItem(NOTIFICATION_KEY)
     .then(JSON.parse)
     .then((data) => {
-        console.log(`storage data for notications: ${data}`)
     if (data === null) {
         Permissions.askAsync(Permissions.NOTIFICATIONS)
         .then(({ status }) => {
-            console.log(status)
             if (status === 'granted') {
             Notifications.cancelAllScheduledNotificationsAsync()
             //for debugging/testing
-            let date = new Date()
-            let tomorrow = new Date(date.getTime() + 5*60000)
-            //let tomorrow = new Date()
-            //tomorrow.setDate(tomorrow.getDate() + 1)
-            //tomorrow.setHours(20)
-            //tomorrow.setMinutes(0)
+            //let date = new Date()
+            //let tomorrow = new Date(date.getTime() + 5*60000)
+            let tomorrow = new Date()
+            tomorrow.setDate(tomorrow.getDate() + 1)
+            tomorrow.setHours(20)
+            tomorrow.setMinutes(0)
             Notifications.scheduleLocalNotificationAsync(
                 createNotification(),
                 {
                 time: tomorrow,
-                repeat: 'minute',
+                repeat: 'day',
                 }
             )
 

@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { getDecks } from '../actions'
 import colors from '../utils/colors'
 
-const { bluegrey } = colors
+const { bluegrey, lighttext } = colors
 
 class Decks extends React.Component {
     componentDidMount() {
@@ -24,7 +24,7 @@ class Decks extends React.Component {
     return (
       <View style={styles.mainView}>
         {this.props.decks.length < 1 && (
-            <Text>Use 'Add Deck' to add new decks to your collection.</Text>
+            <Text style={styles.noDecks}>Use 'Add Deck' to add new decks to your collection.</Text>
         )}
         {this.props.decks.length > 0 && (
         <List
@@ -35,7 +35,7 @@ class Decks extends React.Component {
             renderItem={({ item }) => (
                 <ListItem
                     onPress={()=>(this.props.navigation.navigate(
-                        'Deck',{deckId: item.id,navTitle: item.title}))}
+                        'Deck',{deckId: item.id}))}
                     title={item.title}
                     hideChevron={true}
                     titleStyle={styles.listTitle}
@@ -58,6 +58,12 @@ const styles = StyleSheet.create({
     mainView:{
         flex: 1,
         backgroundColor: bluegrey,
+    },
+    noDecks:{
+        textAlign:'center',
+        fontSize: 20,
+        padding: 30,
+        color: lighttext,
     },
     listContainer:{
         margin: 10,

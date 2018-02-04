@@ -40,6 +40,7 @@ class AddDeck extends React.Component {
       .then(id=>{
         this.props.getDecks()
         this.setState({title:'',titleError:null})
+        Keyboard.dismiss()
         return this.props.navigation.navigate('Deck',{deckId: id,navTitle: this.state.title})
       })
     }

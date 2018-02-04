@@ -3,6 +3,7 @@ import {
   Text,
   View,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import { Card, Button } from 'react-native-elements'
 import { connect } from 'react-redux';
@@ -49,7 +50,7 @@ class Deck extends React.Component {
               buttonStyle={styles.buttonStyle}
               title='Add Card'
               onPress={() => {this.props.navigation.navigate('AddQuestion',
-                {navTitle: title, deckId: id})}
+                {deckId: id})}
               }
             />
           </View>
@@ -59,8 +60,13 @@ class Deck extends React.Component {
               backgroundColor={lightgreen}
               buttonStyle={[styles.buttonStyle, { marginTop: 10 }]}
               title='Start Quiz'
-              onPress={() => {this.props.navigation.navigate('Quiz',
-                {navTitle: title,questions: questions, deckId: id})}
+              onPress={() => { cardCount === 0 ?
+                  Alert.alert(
+                    'Add Cards First',
+                    'Cards are needed before you can run a Quiz!',
+                    [{text: 'OK'}],
+                    { cancelable: false }) : this.props.navigation.navigate('Quiz',
+                {questions, deckId: id})}
               }
             />
           </View>

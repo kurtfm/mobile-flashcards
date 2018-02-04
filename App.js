@@ -13,7 +13,7 @@ import Deck from './components/Deck'
 import AddQuestion from './components/AddQuestion'
 import Quiz from './components/Quiz'
 import { resetData } from './utils/api'
-import { setLocalNotification,resetNotificationData } from './utils/helpers'
+import { setLocalNotification,clearLocalNotification } from './utils/helpers'
 
 
 const { white, indigo } = colors
@@ -39,10 +39,13 @@ const MainNavigator =  StackNavigator({
   Home: {
     screen: Tabs,
     navigationOptions: {
-      title: "All Decks",
+      title: "Home",
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: indigo
+        backgroundColor: indigo,
+      },
+      titleStyle: {
+        textAlign:'center',
       }
     }
   },
@@ -59,7 +62,7 @@ const MainNavigator =  StackNavigator({
   AddDeck: {
     screen: AddDeck,
     navigationOptions: {
-      title: "Add New Deck",
+      title: "Add Deck",
       headerTintColor: white,
       headerStyle: {
         backgroundColor: indigo
@@ -69,7 +72,7 @@ const MainNavigator =  StackNavigator({
   AddQuestion: {
     screen: AddQuestion,
     navigationOptions: {
-      title: "Add New Card",
+      title: "Add Question",
       headerTintColor: white,
       headerStyle: {
         backgroundColor: indigo
@@ -79,7 +82,7 @@ const MainNavigator =  StackNavigator({
   Quiz: {
     screen: Quiz,
     navigationOptions: {
-      title: "Quiz Time!",
+      title: "Quiz",
       headerTintColor: white,
       headerStyle: {
         backgroundColor: indigo
@@ -98,7 +101,7 @@ export default class App extends React.Component {
 
     setLocalNotification()
     //for testing purposes if you need to...
-    //clearLocalNotification
+    //clearLocalNotification()
   }
   render() {
     return (
