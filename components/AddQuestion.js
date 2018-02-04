@@ -2,12 +2,14 @@ import React from 'react';
 import {
   Text,
   View,
+  TouchableWithoutFeedback,
   KeyboardAvoidingView,
   Keyboard,
   NavigationActions,
   StyleSheet,
 } from 'react-native';
 import {
+  Card,
   Button,
   FormLabel,
   FormInput,
@@ -92,36 +94,40 @@ class AddQuestion extends React.Component {
 
   render() {
     return (
-      <View style={styles.mainView}  backgroundColor={bluegrey} >
-        <View style={styles.form}>
-          <Text style={styles.subtitle}>Create a question and use either a correct or incorrect answer to make it interesting.</Text>
-          <FormLabel>Question:</FormLabel>
-          <FormInput
-            onChangeText={(question)=>{this.questionValidation(question)}}
-            shake={this.state.questionError}
-            value={this.state.question}
-          />
-          { this.state.questionError !== null && (
-          <FormValidationMessage>
-            {this.state.questionError}
-          </FormValidationMessage>
-          )}
-          <FormLabel>Answer:</FormLabel>
-          <FormInput
-            onChangeText={(answer)=>{this.answerValidation(answer)}}
-            shake={this.state.answerError}
-            value={this.state.answer}
-          />
-          { this.state.answerError !== null && (
-          <FormValidationMessage>
-            {this.state.answerError}
-          </FormValidationMessage>
-          )}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={styles.mainView}  backgroundColor={bluegrey} >
+            <Card backgroundColor={white}>
+              <KeyboardAvoidingView behavior="padding" style={styles.form}>
+                <Text style={styles.subtitle}>Create a card with a question and answer.</Text>
+                <FormLabel>Question:</FormLabel>
+                <FormInput
+                  onChangeText={(question)=>{this.questionValidation(question)}}
+                  shake={this.state.questionError}
+                  value={this.state.question}
+                />
+                { this.state.questionError !== null && (
+                <FormValidationMessage>
+                  {this.state.questionError}
+                </FormValidationMessage>
+                )}
+                <FormLabel>Answer:</FormLabel>
+                <FormInput
+                  onChangeText={(answer)=>{this.answerValidation(answer)}}
+                  shake={this.state.answerError}
+                  value={this.state.answer}
+                />
+                { this.state.answerError !== null && (
+                <FormValidationMessage>
+                  {this.state.answerError}
+                </FormValidationMessage>
+                )}
+            </KeyboardAvoidingView>
+            <View style={styles.buttonView}>
+              <Button onPress={this.handleAdd} title='Submit'/>
+            </View>
+          </Card>
         </View>
-        <View>
-          <Button onPress={this.handleAdd} title='Submit'/>
-        </View>
-      </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
@@ -137,6 +143,10 @@ const styles = StyleSheet.create({
   },
   form:{
     padding:20,
+    marginBottom: 20,
+  },
+  buttonView:{
+    marginTop: 30
   }
 })
 

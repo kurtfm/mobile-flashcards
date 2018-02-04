@@ -2,12 +2,13 @@ import React from 'react';
 import {
   Text,
   View,
-  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
   Keyboard,
   NavigationActions,
   StyleSheet,
 } from 'react-native';
 import {
+  Card,
   Button,
   FormLabel,
   FormInput,
@@ -63,24 +64,28 @@ class AddDeck extends React.Component {
 
   render() {
     return (
-      <View style={styles.mainView}  backgroundColor={bluegrey} >
-        <View style={styles.form}>
-          <FormLabel>Title</FormLabel>
-          <FormInput
-            onChangeText={(title)=>{this.titleValidation(title)}}
-            shake={this.state.titleError}
-            value={this.state.title}
-          />
-          { this.state.titleError !== null && (
-          <FormValidationMessage>
-            {this.state.titleError}
-          </FormValidationMessage>
-          )}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={styles.mainView}  backgroundColor={bluegrey} >
+          <Card backgroundColor={white}>
+          <View style={styles.form}>
+            <FormLabel>Title</FormLabel>
+            <FormInput
+              onChangeText={(title)=>{this.titleValidation(title)}}
+              shake={this.state.titleError}
+              value={this.state.title}
+            />
+            { this.state.titleError !== null && (
+            <FormValidationMessage>
+              {this.state.titleError}
+            </FormValidationMessage>
+            )}
+          </View>
+          <View>
+            <Button onPress={this.handleAdd} title='Submit'/>
+          </View>
+          </Card>
         </View>
-        <View>
-          <Button onPress={this.handleAdd} title='Submit'/>
-        </View>
-      </View>
+      </TouchableWithoutFeedback>
     )
   }
 }

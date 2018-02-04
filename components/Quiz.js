@@ -60,7 +60,7 @@ class Quiz extends React.Component {
       correctCount: prevState.correctCount + result,
     }),()=>{
       if(endPosition === currentPosition){
-        const finalScore = ( this.state.correctCount / questions.length ) * 100
+        const finalScore = Math.floor(( this.state.correctCount / questions.length ) * 100)
         this.setState({
           finished: true,
           score: finalScore,

@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import uuidv4 from 'uuid/v4'
 
-const CARDS_STORAGE_KEY = '@flashCardsMobileApp'
+export const CARDS_STORAGE_KEY = '@flashCardsMobileApp'
 
 export function resetData(){
     return AsyncStorage.removeItem(CARDS_STORAGE_KEY)

@@ -13,6 +13,7 @@ import Deck from './components/Deck'
 import AddQuestion from './components/AddQuestion'
 import Quiz from './components/Quiz'
 import { resetData } from './utils/api'
+import { setLocalNotification,resetNotificationData } from './utils/helpers'
 
 
 const { white, indigo } = colors
@@ -93,6 +94,11 @@ export default class App extends React.Component {
   componentDidMount() {
     //for testing purposes if you need to...
     //resetData()
+    //uncomment and save a couple times
+
+    setLocalNotification()
+    //for testing purposes if you need to...
+    //clearLocalNotification
   }
   render() {
     return (
