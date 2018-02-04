@@ -10,6 +10,7 @@ import {
 import { Card, Button } from 'react-native-elements'
 import colors from '../utils/colors'
 import QuizResults from './QuizResults'
+import { clearLocalNotification,setLocalNotification } from '../utils/helpers';
 
 const { green, red, lighttext, bluegrey, lightblue, lightgreen } = colors
 
@@ -30,6 +31,11 @@ class Quiz extends React.Component {
     correctCount:0,
     score:0,
     finished: false,
+  }
+
+  updateNotification() {
+    clearLocalNotification()
+      .then(setLocalNotification);
   }
 
   flipCard(){
@@ -66,6 +72,7 @@ class Quiz extends React.Component {
           finished: true,
           score: finalScore,
         })
+        this.updateNotification()
       }
       else{
         this.updateCardText()
