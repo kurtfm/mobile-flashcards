@@ -16,7 +16,7 @@ https://review.udacity.com/#!/rubrics/1021/view
   * button to view answer
   * card flip has animation
   * user can indicate correct vs incorrect
-  * how many cards left that have NOT been answered
+  * how many cards remaining
   * at the end the score is shown in % and buttons to restart or return to deck
 * A notification is scheduled for once per day which is reset when the user finishes one quiz
 

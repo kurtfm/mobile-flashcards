@@ -110,7 +110,7 @@ class Quiz extends React.Component {
       questions,
     } = this.state
       const id = this.props.navigation.state.params.deckId
-      const positionDiff = (endPosition - currentPosition) + 1
+      const positionDiff = (endPosition - currentPosition)
       const cardsRemaining = `${positionDiff} card${positionDiff == 1 ? `` : `s`} remaining`
       return (
         <ScrollView style={styles.mainView} backgroundColor={bluegrey} >
