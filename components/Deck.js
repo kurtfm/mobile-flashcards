@@ -2,8 +2,10 @@ import React from 'react';
 import {
   Text,
   View,
+  StyleSheet,
+  Alert,
 } from 'react-native';
-import {Card, Button, Header} from 'react-native-elements'
+import { Card, Button } from 'react-native-elements'
 import { connect } from 'react-redux';
 import { getDeck, deleteDeck } from '../actions'
 import colors from '../utils/colors'
@@ -31,12 +33,14 @@ class Deck extends React.Component {
 
   render() {
     const { title, questions, id } = this.props.deck
+    const cardCount =  typeof questions !== 'undefined' ? questions.length : 0 
+    const cardEnding = cardCount > 1 || cardCount === 0 ? 's' : ''
     return (
-      <View style={styles.mainView}>
+      <View style={styles.mainView}  backgroundColor={bluegrey} >
           <Card title={title}>
             <View>
               <Text style={styles.cardSummary}>
-                {`${ typeof questions !== 'undefined' ? questions.length : 0 } cards`}
+                {`${cardCount} card${cardEnding}`}
               </Text>
             </View>
             <View>
@@ -46,7 +50,7 @@ class Deck extends React.Component {
               buttonStyle={styles.buttonStyle}
               title='Add Card'
               onPress={() => {this.props.navigation.navigate('AddQuestion',
-                {navTitle: title,title: title})}
+                {deckId: id})}
               }
             />
           </View>
@@ -56,8 +60,13 @@ class Deck extends React.Component {
               backgroundColor={lightgreen}
               buttonStyle={[styles.buttonStyle, { marginTop: 10 }]}
               title='Start Quiz'
-              onPress={() => {this.props.navigation.navigate('Quiz',
-                {navTitle: title,questions: questions })}
+              onPress={() => { cardCount === 0 ?
+                  Alert.alert(
+                    'Add Cards First',
+                    'Cards are needed before you can run a Quiz!',
+                    [{text: 'OK'}],
+                    { cancelable: false }) : this.props.navigation.navigate('Quiz',
+                {questions, deckId: id})}
               }
             />
           </View>
@@ -75,7 +84,11 @@ class Deck extends React.Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
+  mainView:{
+      flex: 1,
+      backgroundColor: bluegrey,
+  },
   cardSummary: {
     textAlign: 'center',
     marginBottom: 10,
@@ -91,7 +104,7 @@ const styles = {
     justifyContent: 'center',
     alignContent: 'center'
   },
-}
+})
 
 function mapStateToProps({deck}){
   return {deck}

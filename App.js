@@ -12,7 +12,8 @@ import AddDeck from './components/AddDeck'
 import Deck from './components/Deck'
 import AddQuestion from './components/AddQuestion'
 import Quiz from './components/Quiz'
-import { setupData } from './utils/api'
+import { resetData } from './utils/api'
+import { setLocalNotification,clearLocalNotification } from './utils/helpers'
 
 
 const { white, indigo } = colors
@@ -38,10 +39,13 @@ const MainNavigator =  StackNavigator({
   Home: {
     screen: Tabs,
     navigationOptions: {
-      title: "All Decks",
+      title: "Home",
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: indigo
+        backgroundColor: indigo,
+      },
+      titleStyle: {
+        textAlign:'center',
       }
     }
   },
@@ -58,6 +62,7 @@ const MainNavigator =  StackNavigator({
   AddDeck: {
     screen: AddDeck,
     navigationOptions: {
+      title: "Add Deck",
       headerTintColor: white,
       headerStyle: {
         backgroundColor: indigo
@@ -67,6 +72,7 @@ const MainNavigator =  StackNavigator({
   AddQuestion: {
     screen: AddQuestion,
     navigationOptions: {
+      title: "Add Question",
       headerTintColor: white,
       headerStyle: {
         backgroundColor: indigo
@@ -76,6 +82,7 @@ const MainNavigator =  StackNavigator({
   Quiz: {
     screen: Quiz,
     navigationOptions: {
+      title: "Quiz",
       headerTintColor: white,
       headerStyle: {
         backgroundColor: indigo
@@ -88,7 +95,13 @@ const store = createStore(reducer, {}, applyMiddleware(thunk))
 
 export default class App extends React.Component {
   componentDidMount() {
-    //setupData()
+    //for testing purposes if you need to...
+    //resetData()
+    //uncomment and save a couple times
+
+    setLocalNotification()
+    //for testing purposes if you need to...
+    //clearLocalNotification()
   }
   render() {
     return (
